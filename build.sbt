@@ -1,0 +1,1 @@
+name := "microzon-auth-client"
