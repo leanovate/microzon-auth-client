@@ -16,4 +16,12 @@ object Main extends App {
   println(myselfToken)
 
   assert(loginToken == myselfToken)
+
+  Await.result(client.logout(loginToken.raw), 5.seconds)
+
+  val checkLogout = client.getMyself(loginToken.raw)
+
+  Await.ready(checkLogout, 5.seconds)
+
+  assert(checkLogout.value.get.isFailure)
 }

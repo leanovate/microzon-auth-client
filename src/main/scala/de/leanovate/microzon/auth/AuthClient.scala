@@ -21,4 +21,11 @@ class AuthClient(baseUrl: String) {
 
     Http(req OK as.json4s.Json).map(_.extract[TokenInfo])
   }
+
+  def logout(rawToken :String): Future[String] = {
+    val req: Req = (base / "v1" / "tokens" / "myself").DELETE.setHeader("Authorization", s"Bearer $rawToken")
+
+    Http(req OK as.String)
+
+  }
 }
