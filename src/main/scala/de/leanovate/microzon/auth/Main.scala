@@ -19,9 +19,14 @@ object Main extends App {
 
   Await.result(client.logout(loginToken.raw), 5.seconds)
 
+  Thread.sleep(2000)
+
   val checkLogout = client.getMyself(loginToken.raw)
 
   Await.ready(checkLogout, 5.seconds)
 
   assert(checkLogout.value.get.isFailure)
+
+  println("All ok")
+  sys.exit()
 }
