@@ -10,7 +10,7 @@ class AuthSimulation extends Simulation {
     .baseURL("http://localhost:8080")
 
   val scn = scenario("Login / get token / logout")
-      .repeat(100) {
+      .repeat(1000) {
         exec(
           http("login").post("/v1/tokens").body(StringBody("{}")).check(
             status.is(201),
@@ -29,12 +29,12 @@ class AuthSimulation extends Simulation {
               status.is(204)
             )
           )
-          .pause(2.second)
-          .exec(
-            http("check token invalid").get("/v1/tokens/myself").header("Authorization", "Bearer ${authorization}").check(
-              status.is(401)
-            )
-          )
+//          .pause(2.second)
+//          .exec(
+//            http("check token invalid").get("/v1/tokens/myself").header("Authorization", "Bearer ${authorization}").check(
+//              status.is(401)
+//            )
+//          )
       }
 
 
